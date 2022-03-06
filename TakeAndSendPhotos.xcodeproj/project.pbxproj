@@ -13,6 +13,12 @@
 		04F5CBF827D400B70097811E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F5CBF627D400B70097811E /* Main.storyboard */; };
 		04F5CBFA27D400B90097811E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F5CBF927D400B90097811E /* Assets.xcassets */; };
 		04F5CBFD27D400B90097811E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F5CBFB27D400B90097811E /* LaunchScreen.storyboard */; };
+		04F5CC0827D408670097811E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0727D408670097811E /* DataModel.swift */; };
+		04F5CC0A27D4CCE80097811E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0927D4CCE80097811E /* NetworkManager.swift */; };
+		04F5CC1027D4FEE80097811E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0F27D4FEE80097811E /* HomeViewController.swift */; };
+		04F5CC1227D500030097811E /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC1127D500030097811E /* HomePresenter.swift */; };
+		04F5CC1527D501B10097811E /* HomeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC1427D501B10097811E /* HomeConfiguration.swift */; };
+		7DB1494D003A5AB28AF9AED9 /* Pods_TakeAndSendPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7FDF142C754248819F33B7 /* Pods_TakeAndSendPhotos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,14 @@
 		04F5CBF927D400B90097811E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04F5CBFC27D400B90097811E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04F5CBFE27D400B90097811E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F5CC0727D408670097811E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		04F5CC0927D4CCE80097811E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		04F5CC0F27D4FEE80097811E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		04F5CC1127D500030097811E /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		04F5CC1427D501B10097811E /* HomeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeConfiguration.swift; sourceTree = "<group>"; };
+		8B7FDF142C754248819F33B7 /* Pods_TakeAndSendPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TakeAndSendPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDCB06B6DBB4F24DD4AB6257 /* Pods-TakeAndSendPhotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TakeAndSendPhotos.release.xcconfig"; path = "Target Support Files/Pods-TakeAndSendPhotos/Pods-TakeAndSendPhotos.release.xcconfig"; sourceTree = "<group>"; };
+		C9C076ABD4415E3365D155A8 /* Pods-TakeAndSendPhotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TakeAndSendPhotos.debug.xcconfig"; path = "Target Support Files/Pods-TakeAndSendPhotos/Pods-TakeAndSendPhotos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DB1494D003A5AB28AF9AED9 /* Pods_TakeAndSendPhotos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +57,8 @@
 			children = (
 				04F5CBEF27D400B70097811E /* TakeAndSendPhotos */,
 				04F5CBEE27D400B70097811E /* Products */,
+				13BF303EEFC5F9D876136637 /* Pods */,
+				B0495236D7ED583807997C2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +73,10 @@
 		04F5CBEF27D400B70097811E /* TakeAndSendPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				04F5CBF027D400B70097811E /* AppDelegate.swift */,
-				04F5CBF227D400B70097811E /* SceneDelegate.swift */,
+				04F5CC1327D500570097811E /* App */,
+				04F5CC0D27D4FE880097811E /* Modules (Presentetion) */,
+				04F5CC0C27D4FE7F0097811E /* Domain */,
+				04F5CC0B27D4FE5E0097811E /* NetworkLayer */,
 				04F5CBF427D400B70097811E /* ViewController.swift */,
 				04F5CBF627D400B70097811E /* Main.storyboard */,
 				04F5CBF927D400B90097811E /* Assets.xcassets */,
@@ -67,6 +86,66 @@
 			path = TakeAndSendPhotos;
 			sourceTree = "<group>";
 		};
+		04F5CC0B27D4FE5E0097811E /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				04F5CC0927D4CCE80097811E /* NetworkManager.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		04F5CC0C27D4FE7F0097811E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				04F5CC0727D408670097811E /* DataModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		04F5CC0D27D4FE880097811E /* Modules (Presentetion) */ = {
+			isa = PBXGroup;
+			children = (
+				04F5CC0E27D4FE960097811E /* Home */,
+			);
+			path = "Modules (Presentetion)";
+			sourceTree = "<group>";
+		};
+		04F5CC0E27D4FE960097811E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04F5CC0F27D4FEE80097811E /* HomeViewController.swift */,
+				04F5CC1127D500030097811E /* HomePresenter.swift */,
+				04F5CC1427D501B10097811E /* HomeConfiguration.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		04F5CC1327D500570097811E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				04F5CBF227D400B70097811E /* SceneDelegate.swift */,
+				04F5CBF027D400B70097811E /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		13BF303EEFC5F9D876136637 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C9C076ABD4415E3365D155A8 /* Pods-TakeAndSendPhotos.debug.xcconfig */,
+				BDCB06B6DBB4F24DD4AB6257 /* Pods-TakeAndSendPhotos.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B0495236D7ED583807997C2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B7FDF142C754248819F33B7 /* Pods_TakeAndSendPhotos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04F5CC0127D400B90097811E /* Build configuration list for PBXNativeTarget "TakeAndSendPhotos" */;
 			buildPhases = (
+				524EE3D8EF5A159022B22BCD /* [CP] Check Pods Manifest.lock */,
 				04F5CBE927D400B70097811E /* Sources */,
 				04F5CBEA27D400B70097811E /* Frameworks */,
 				04F5CBEB27D400B70097811E /* Resources */,
+				9424A8E41A835D4FF4761E0B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +214,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		524EE3D8EF5A159022B22BCD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TakeAndSendPhotos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9424A8E41A835D4FF4761E0B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TakeAndSendPhotos/Pods-TakeAndSendPhotos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TakeAndSendPhotos/Pods-TakeAndSendPhotos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TakeAndSendPhotos/Pods-TakeAndSendPhotos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		04F5CBE927D400B70097811E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F5CC0A27D4CCE80097811E /* NetworkManager.swift in Sources */,
 				04F5CBF527D400B70097811E /* ViewController.swift in Sources */,
+				04F5CC0827D408670097811E /* DataModel.swift in Sources */,
+				04F5CC1527D501B10097811E /* HomeConfiguration.swift in Sources */,
+				04F5CC1227D500030097811E /* HomePresenter.swift in Sources */,
 				04F5CBF127D400B70097811E /* AppDelegate.swift in Sources */,
 				04F5CBF327D400B70097811E /* SceneDelegate.swift in Sources */,
+				04F5CC1027D4FEE80097811E /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +412,7 @@
 		};
 		04F5CC0227D400B90097811E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9C076ABD4415E3365D155A8 /* Pods-TakeAndSendPhotos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +441,7 @@
 		};
 		04F5CC0327D400B90097811E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDCB06B6DBB4F24DD4AB6257 /* Pods-TakeAndSendPhotos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
