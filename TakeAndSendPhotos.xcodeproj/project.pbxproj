@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				04F5CC1327D500570097811E /* App */,
-				04F5CC0D27D4FE880097811E /* Modules (Presentetion) */,
+				04F5CC0D27D4FE880097811E /* Modules (Presentation) */,
 				04F5CC0C27D4FE7F0097811E /* Domain */,
 				04F5CC0B27D4FE5E0097811E /* NetworkLayer */,
 				04F5CBF427D400B70097811E /* ViewController.swift */,
@@ -102,12 +102,12 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		04F5CC0D27D4FE880097811E /* Modules (Presentetion) */ = {
+		04F5CC0D27D4FE880097811E /* Modules (Presentation) */ = {
 			isa = PBXGroup;
 			children = (
 				04F5CC0E27D4FE960097811E /* Home */,
 			);
-			path = "Modules (Presentetion)";
+			path = "Modules (Presentation)";
 			sourceTree = "<group>";
 		};
 		04F5CC0E27D4FE960097811E /* Home */ = {
