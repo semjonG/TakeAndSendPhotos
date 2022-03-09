@@ -10,7 +10,7 @@ import Alamofire
 
 // HTTP (CRUD)
 protocol NetworkProtocol {
-    func post()
+    func authorization()
 }
 
 struct Login: Encodable {
@@ -19,14 +19,15 @@ struct Login: Encodable {
 }
 
 // доработать нетворкмэнаджер, найти шаблонное решение (функционал по CRUD) 
-class NetworkManager {
+class NetworkManager: NetworkProtocol {
+
     let login = Login(email: "test", password: "123456")
 
-    func logIn() {
+    func authorization() {
         AF.request("https://test.dewival.com/api/login/",
                    method: .post,
                    parameters: login,
-                   encoder: JSONParameterEncoder.default).response { response in
+                   encoder: URLEncodedFormEncoder(dataEncoding: .base64) as! ParameterEncoder).response { response in
             debugPrint(response)
         }
     }
@@ -36,11 +37,7 @@ class NetworkManager {
 
 
 
-
-
-
-
-// MARK: - пример авторизации по кнопке (текстфилды + кнопка)
+// MARK: - пример авторизации по кнопке (заполнение текстфилдов + кнопка логин)
 
 private let url = "https://test.dewival.com/api/login/"
 var parameters = ["user": "test", "password": "123456"]
