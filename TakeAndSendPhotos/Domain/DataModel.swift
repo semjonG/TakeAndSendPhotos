@@ -17,17 +17,34 @@ class DataModel: Object {
 }
 
 protocol DataManagerProtocol {
-    func write()
+//    func addToRalm()
 }
+
 // доработать датамэнаджер, найти шаблонное решение 
 class DataManager: DataManagerProtocol {
-    func write() {
-//        написать функционал записи
-    }
-    
-    let realm = try! Realm()
     
     
+//    let realm = try! Realm()
+//    lazy var categories: Results<Category> = { self.realm.objects(Category) }()
+//
+//    func addToRalm() {
+//        if categories.count == 0 { // 1
+//
+//           try! realm.write() { // 2
+//
+//            let defaultCategories = ["Birds", "Mammals", "Flora", "Reptiles", "Arachnids" ] // 3
+//
+//            for category in defaultCategories { // 4
+////              let newCategory = Category()
+//              newCategory.name = category
+//              self.realm.add(newCategory)
+//            }
+//          }
+//
+////          categories = realm.objects(Category) // 5
+//        }
+//
+//    }
 }
 
 ////    экземпляр

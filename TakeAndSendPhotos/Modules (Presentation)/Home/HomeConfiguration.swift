@@ -6,11 +6,12 @@
 //
 
 import Foundation
-import UIKit
 
-// TODO: Dopisat' kod. (связать Presenter  и ViewController в  HomeConfiguration используя циклическую зависимость)
+// TODO: Dopisat' kod. (связать Presenter и ViewController в  HomeConfiguration используя циклическую зависимость)
 class HomeConfiguration {
-    static func build(vc: HomeViewController) {
+    
+    static func configurate(vc: HomeViewController) {
+        
         let presenter = HomePresenter()
         
         

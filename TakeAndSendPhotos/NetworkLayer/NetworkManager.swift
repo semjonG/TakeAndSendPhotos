@@ -5,12 +5,13 @@
 //  Created by mac on 06.03.2022.
 //
 
-import UIKit
+
 import Alamofire
 
 // HTTP (CRUD)
 protocol NetworkProtocol {
-    func authorization()
+    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void)
+    func upLoadPhoto()
 }
 
 struct Login: Encodable {
@@ -20,16 +21,32 @@ struct Login: Encodable {
 
 // доработать нетворкмэнаджер, найти шаблонное решение (функционал по CRUD) 
 class NetworkManager: NetworkProtocol {
+    
+    enum Static {
+        static let baseUrl = "https://test.dewival.com/api/"
+    }
+    
 
-    let login = Login(email: "test", password: "123456")
-
-    func authorization() {
-        AF.request("https://test.dewival.com/api/login/",
+    
+    
+    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void) {
+        let parameters = Login(email: email, password: password)
+        AF.request(Static.baseUrl + "login/",
                    method: .post,
-                   parameters: login,
+                   parameters: parameters,
                    encoder: URLEncodedFormEncoder(dataEncoding: .base64) as! ParameterEncoder).response { response in
-            debugPrint(response)
+//            if true {
+                onCompletion(true)
+//            }
         }
+    }
+    
+    func upLoadPhoto() {
+        let fileURL = Bundle.main.url(forResource: "photo", withExtension: "jpg")
+
+//        AF.upload(fileURL, to: "https://test.dewival.com/api/sendfile/").responseDecodable(of: DecodableType.self) { response in
+//            debugPrint(response)
+//        }
     }
 }
 
@@ -41,31 +58,31 @@ class NetworkManager: NetworkProtocol {
 
 private let url = "https://test.dewival.com/api/login/"
 var parameters = ["user": "test", "password": "123456"]
-//    var token = ["X-Auth-Token": ""]
+//    var token = ["...": ""]
 
 // Parameters textfields
-@IBOutlet weak var userTF: UITextField?
-@IBOutlet weak var passwordTF: UITextField?
-
-// A method for the login button
-@IBAction func loginButton(_ sender: UIButton) {
-    parameters["user"] = userTF?.text
-    parameters["password"] = passwordTF?.text
-    AF.request(url,
-               method: .post,
-               parameters: parameters,
-               encoder: JSONParameterEncoder.default).response { response in
-        debugPrint(response)
-
-
-            //Reading JWT authentication token from the server
-            if let tokenString = response.result.value as? String {
-                self.token["X-Auth-Token"] = tokenString
-            }
-
-
-    }
-}
+//@IBOutlet weak var userTF: UITextField?
+//@IBOutlet weak var passwordTF: UITextField?
+//
+//// A method for the login button
+//@IBAction func loginButton(_ sender: UIButton) {
+//    parameters["user"] = userTF?.text
+//    parameters["password"] = passwordTF?.text
+//    AF.request(url,
+//               method: .post,
+//               parameters: parameters,
+//               encoder: JSONParameterEncoder.default).response { response in
+//        debugPrint(response)
+//
+//
+//            //Reading JWT authentication token from the server
+//            if let tokenString = response.result.value as? String {
+//                self.token["..."] = tokenString
+//            }
+//
+//
+//    }
+//}
 
 
 // MARK: - CRUD реализация
