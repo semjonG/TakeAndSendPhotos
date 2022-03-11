@@ -15,7 +15,7 @@ protocol RootPresenterInput: BasePresenterInput {
 }
 
 protocol RootPresenterOutput: BasePresenterOutput {
-    
+    func showInfoLabel(text: String)
 }
 
 class RootPresenter {
@@ -44,7 +44,9 @@ extension RootPresenter: RootPresenterInput {
     
     func onLogin(email: String, password: String) {
         networkManager.logIn(email: email, password: password) { result in
-            print("test")
+            DispatchQueue.main.async {
+                self.router.routeToPhoto()
+            }
         }
         // Netwok
     }

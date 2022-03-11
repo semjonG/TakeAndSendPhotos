@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        present(HomeViewController(), animated: true, completion: nil)
+//        present(HomeViewController(), animated: true, completion: nil)
         // Do any additional setup after loading the view.
     }
 

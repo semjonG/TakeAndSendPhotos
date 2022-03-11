@@ -38,6 +38,8 @@ class RootViewController: UIViewController {
         return button
     }()
     
+    var label = UILabel()
+    
     // MARK: Injections
     var presenter: RootPresenterInput!
     var configurator: RootConfigurable!
@@ -46,12 +48,18 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(label)
         
         NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalToConstant: 100),
+            label.heightAnchor.constraint(equalToConstant: 40),
+            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
             emailTextField.widthAnchor.constraint(equalToConstant: 100),
             emailTextField.heightAnchor.constraint(equalToConstant: 40),
             emailTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -82,5 +90,9 @@ class RootViewController: UIViewController {
 
 // MARK: - RootPresenterOutput
 extension RootViewController: RootPresenterOutput {
+    func showInfoLabel(text: String) {
+        label.text = text
+    }
+    
 
 }

@@ -8,9 +8,8 @@
 
 import Alamofire
 
-// HTTP (CRUD)
 protocol NetworkProtocol {
-    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void)
+    func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void)
     func upLoadPhoto()
 }
 
@@ -18,39 +17,84 @@ struct Login: Encodable {
     let email: String
     let password: String
 }
-
-// доработать нетворкмэнаджер, найти шаблонное решение (функционал по CRUD) 
+ 
 class NetworkManager: NetworkProtocol {
-    
+    let keychain = KeychainHelper()
     enum Static {
         static let baseUrl = "https://test.dewival.com/api/"
     }
-    
-
-    
-    
-    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void) {
-        let parameters = Login(email: email, password: password)
-        AF.request(Static.baseUrl + "login/",
-                   method: .post,
-                   parameters: parameters,
-                   encoder: URLEncodedFormEncoder(dataEncoding: .base64) as! ParameterEncoder).response { response in
-//            if true {
-                onCompletion(true)
-//            }
+   
+    func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void) {
+//        let parameters = Login(email: email, password: password)
+        
+        guard let endpointUrl = URL(string: Static.baseUrl + "login/") else {
+            return
+        }
+        
+        //Make JSON to send request to server
+        var json = [String:Any]()
+        
+        json["login"] = "test"
+        json["password"] = "123456".toBase64()
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json, options: [])
+//            let accessToken =
+            var request = URLRequest(url: endpointUrl)
+            request.httpMethod = "POST"
+            request.httpBody = data
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+//            request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                            
+           
+            let task = URLSession.shared.dataTask(with: request) { data2, res, err in
+                
+                if let httpResponse = res as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        self.keychain.set(value: email, key: "login")
+                        self.keychain.set(value: password, key: "pwass")
+                        // safe login and password
+                        let string = try! JSONSerialization.jsonObject(with: data2!, options: [.allowFragments])
+                        //
+                        onCompletion(string as! String)
+                    }
+                }
+                
+            }
+            task.resume()
+            
+            
+        }catch{
+            print(error)
         }
     }
     
     func upLoadPhoto() {
         let fileURL = Bundle.main.url(forResource: "photo", withExtension: "jpg")
-
-//        AF.upload(fileURL, to: "https://test.dewival.com/api/sendfile/").responseDecodable(of: DecodableType.self) { response in
-//            debugPrint(response)
-//        }
+        
+        //        AF.upload(fileURL, to: "https://test.dewival.com/api/sendfile/").responseDecodable(of: DecodableType.self) { response in
+        //            debugPrint(response)
+        //        }
     }
 }
 
 
+extension String {
+
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+
+        return String(data: data, encoding: .utf8)
+    }
+
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
+
+}
 
 
 
@@ -87,59 +131,59 @@ var parameters = ["user": "test", "password": "123456"]
 
 // MARK: - CRUD реализация
 
-class CRUDAuthorization {
-    enum Router: URLRequestConvertible {
-        case createUser(parameters: Parameters)
-        case readUser(username: String)
-        case updateUser(username: String, parameters: Parameters)
-        case destroyUser(username: String)
-
-        static let baseURLString = "https://example.com"
-
-        var method: HTTPMethod {
-            switch self {
-            case .createUser:
-                return .post
-            case .readUser:
-                return .get
-            case .updateUser:
-                return .put
-            case .destroyUser:
-                return .delete
-            }
-        }
-
-        var path: String {
-            switch self {
-            case .createUser:
-                return "/users"
-            case .readUser(let username):
-                return "/users/\(username)"
-            case .updateUser(let username, _):
-                return "/users/\(username)"
-            case .destroyUser(let username):
-                return "/users/\(username)"
-            }
-        }
-
-        // MARK: URLRequestConvertible
-
-        func asURLRequest() throws -> URLRequest {
-            let url = try Router.baseURLString.asURL()
-
-            var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-            urlRequest.httpMethod = method.rawValue
-
-            switch self {
-            case .createUser(let parameters):
-                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            case .updateUser(_, let parameters):
-                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            default:
-                break
-            }
-
-            return urlRequest
-        }
-    }
-}
+//class CRUDAuthorization {
+//    enum Router: URLRequestConvertible {
+//        case createUser(parameters: Parameters)
+//        case readUser(username: String)
+//        case updateUser(username: String, parameters: Parameters)
+//        case destroyUser(username: String)
+//
+//        static let baseURLString = "https://example.com"
+//
+//        var method: HTTPMethod {
+//            switch self {
+//            case .createUser:
+//                return .post
+//            case .readUser:
+//                return .get
+//            case .updateUser:
+//                return .put
+//            case .destroyUser:
+//                return .delete
+//            }
+//        }
+//
+//        var path: String {
+//            switch self {
+//            case .createUser:
+//                return "/users"
+//            case .readUser(let username):
+//                return "/users/\(username)"
+//            case .updateUser(let username, _):
+//                return "/users/\(username)"
+//            case .destroyUser(let username):
+//                return "/users/\(username)"
+//            }
+//        }
+//
+//        // MARK: URLRequestConvertible
+//
+//        func asURLRequest() throws -> URLRequest {
+//            let url = try Router.baseURLString.asURL()
+//
+//            var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+//            urlRequest.httpMethod = method.rawValue
+//
+//            switch self {
+//            case .createUser(let parameters):
+//                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+//            case .updateUser(_, let parameters):
+//                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+//            default:
+//                break
+//            }
+//
+//            return urlRequest
+//        }
+//    }
+//}

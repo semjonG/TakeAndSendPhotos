@@ -1,18 +1,18 @@
 //
-//  RootRouter.swift
+//  PhotoRouter.swift
 //  TakeAndSendPhotos
 //
-//  Created by mac on 10.03.2022.
+//  Created by mac on 11.03.2022.
 //  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
 import UIKit
 
-protocol RootRoutable: ViewRoutable {
+protocol PhotoRoutable: ViewRoutable {
     
 }
 
-class RootRouter {
+class PhotoRouter {
     
     // MARK: Injections
     weak var viewController: UIViewController?
@@ -24,7 +24,7 @@ class RootRouter {
     
 }
 
-// MARK: - RootRoutable
-extension RootRouter: RootRoutable {
+// MARK: - PhotoRoutable
+extension PhotoRouter: PhotoRoutable {
     
 }
