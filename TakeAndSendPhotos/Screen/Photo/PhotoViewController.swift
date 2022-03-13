@@ -3,7 +3,6 @@
 //  TakeAndSendPhotos
 //
 //  Created by mac on 11.03.2022.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
 import UIKit
@@ -22,25 +21,25 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
         
     }
     
-    
     private var imagePicker = UIImagePickerController()
     
     // MARK: Outlets
     
-    lazy var pickImagesButton: UIButton = {
+    private lazy var pickImagesButton: UIButton = {
         let button = UIButton()
         button.setTitle("Pick images", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .gray
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 15
         button.addTarget(self, action: #selector(pickImageButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    lazy var textLabel: UILabel = {
+    private lazy var textLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
+        label.adjustsFontSizeToFitWidth = true
         label.text = "Pick 3 images"
         return label
     }()

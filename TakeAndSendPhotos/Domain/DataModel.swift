@@ -5,7 +5,6 @@
 //  Created by mac on 06.03.2022.
 //
 
-import Foundation
 import RealmSwift
 
 class DataModel: Object {

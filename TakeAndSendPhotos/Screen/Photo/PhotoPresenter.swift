@@ -3,7 +3,6 @@
 //  TakeAndSendPhotos
 //
 //  Created by mac on 11.03.2022.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +11,6 @@ protocol PhotoPresenterInput: BasePresenterInput {
     
     var router: PhotoRoutable { get }
     func set(chosenPhoto: [UIImage])
-    
 }
 
 protocol PhotoPresenterOutput: BasePresenterOutput {
@@ -33,7 +31,6 @@ class PhotoPresenter {
         self.output = output
         self.router = router
     }
-    
 }
 
 // MARK: - PhotoPresenterInput
@@ -45,7 +42,6 @@ extension PhotoPresenter: PhotoPresenterInput {
             dispatchGroup.enter()
             networkManager.uploadImage(image: item) { res in
                 dispatchGroup.leave()
-            
             }
         }
         
@@ -54,7 +50,6 @@ extension PhotoPresenter: PhotoPresenterInput {
 //            DataManager.chosenPhotos
         }
     }
-    
     
     func viewDidLoad() {
         

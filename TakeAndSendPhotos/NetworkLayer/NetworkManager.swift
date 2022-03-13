@@ -6,30 +6,28 @@
 //
 
 
-import Alamofire
-import KeychainSwift
+import UIKit
 
 protocol NetworkProtocol {
     func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void)
-
 }
 
 struct Login: Encodable {
     let email: String
     let password: String
 }
- 
+
 class NetworkManager: NetworkProtocol {
+    
     let keychain = KeychainManager()
+    
     enum Static {
         static let baseUrl = "https://test.dewival.com/api/"
     }
-   
+    
     func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void) {
         
-        guard let endpointUrl = URL(string: Static.baseUrl + "login/") else {
-            return
-        }
+        guard let endpointUrl = URL(string: Static.baseUrl + "login/") else { return }
         
         //Make JSON to send request to server
         var json = [String:Any]()
@@ -46,23 +44,21 @@ class NetworkManager: NetworkProtocol {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-                            
-           
+            
             let task = URLSession.shared.dataTask(with: request) { data2, res, err in
                 
                 if let httpResponse = res as? HTTPURLResponse {
                     if httpResponse.statusCode == 200 {
-//                        self.keychain.set(value: email, key: "login")
-//                        self.keychain.set(value: password, key: "pwass")
+               
                         // save login and password
+                        self.keychain.saveToKeychain(login: email, password: password)
+                        // save token
                         let string = try! JSONSerialization.jsonObject(with: data2!, options: [.allowFragments])
-                        //
                         self.keychain.save(key: "token", value: string)
                         
                         onCompletion(string as! String)
                     }
                 }
-                
             }
             task.resume()
             
@@ -71,16 +67,14 @@ class NetworkManager: NetworkProtocol {
         }
     }
     
-    
-    
     func uploadImage(image: UIImage, onCompletion: @escaping (Bool) -> ()) {
         let url = URL(string: Static.baseUrl + "sendfile/")
-
+        
         // generate boundary string using a unique per-app string
         let boundary = UUID().uuidString
-
+        
         let session = URLSession.shared
-
+        
         // Set the URLRequest to POST and to the specified URL
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
@@ -89,17 +83,15 @@ class NetworkManager: NetworkProtocol {
         // And the boundary is also set here
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
-print(token)
+        print(token)
         var data = Data()
-
+        
         // Add the image data to the raw http request data
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-//        data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
         data.append(image.pngData()!)
-
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-
+        
         // Send a POST request to the URL, with the data we created earlier
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
             if error == nil {
@@ -120,20 +112,10 @@ print(token)
     }
 }
 
-
 extension String {
-
-//    func fromBase64() -> String? {
-//        guard let data = Data(base64Encoded: self) else {
-//            return nil
-//        }
-//
-//        return String(data: data, encoding: .utf8)
-//    }
-
+    
     func toBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }
-
 }
 

@@ -3,7 +3,6 @@
 //  TakeAndSendPhotos
 //
 //  Created by mac on 10.03.2022.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +11,17 @@ class RootViewController: UIViewController {
     
     // MARK: UI
     
-    lazy var emailTextField: UITextField = {
+    private lazy var textLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .darkGray
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Please, enter your login and password"
+        label.frame = CGRect(x: 300, y: 300, width: 100, height: 20)
+        return label
+    }()
+    
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
@@ -21,7 +30,7 @@ class RootViewController: UIViewController {
         return textField
     }()
     
-    lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
@@ -30,18 +39,16 @@ class RootViewController: UIViewController {
         return textField
     }()
     
-    lazy var loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Login", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .blue
         button.addTarget(self, action: #selector(onLogin), for: .touchUpInside)
+        button.layer.cornerRadius = 15
         
         return button
     }()
-    
-    var label = UILabel()
-    
     
     // MARK: Injections
     var presenter: RootPresenterInput!
@@ -51,19 +58,18 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Please, enter your login and password"
-        
         
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
-        view.addSubview(label)
+        view.addSubview(textLabel)
+        
         
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalToConstant: 100),
-            label.heightAnchor.constraint(equalToConstant: 40),
-            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            textLabel.widthAnchor.constraint(equalToConstant: 300),
+            textLabel.heightAnchor.constraint(equalToConstant: 50),
+            textLabel.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: 2),
+            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             emailTextField.widthAnchor.constraint(equalToConstant: 100),
             emailTextField.heightAnchor.constraint(equalToConstant: 40),
@@ -96,8 +102,6 @@ class RootViewController: UIViewController {
 // MARK: - RootPresenterOutput
 extension RootViewController: RootPresenterOutput {
     func showInfoLabel(text: String) {
-        label.text = text
+        textLabel.text = text
     }
-    
-
 }

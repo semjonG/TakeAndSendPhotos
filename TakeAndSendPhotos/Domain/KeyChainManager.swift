@@ -5,7 +5,6 @@
 //  Created by mac on 10.03.2022.
 //
 
-import Foundation
 import Locksmith
 
 class KeychainManager {
@@ -17,6 +16,7 @@ class KeychainManager {
             print("Unable to save data")
         }
     }
+    
     func save(key: String, value: Any) {
         do {
             try Locksmith.deleteDataForUserAccount(userAccount: "MyAccount")
@@ -25,9 +25,9 @@ class KeychainManager {
             print("Unable to save data")
         }
     }
+    
     func get(key: String) -> Any? {
         dictionary![key]
-        
     }
     
     // загрузка из keychain
