@@ -12,7 +12,7 @@
 		04F5CBF527D400B70097811E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CBF427D400B70097811E /* ViewController.swift */; };
 		04F5CBFA27D400B90097811E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F5CBF927D400B90097811E /* Assets.xcassets */; };
 		04F5CBFD27D400B90097811E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F5CBFB27D400B90097811E /* LaunchScreen.storyboard */; };
-		04F5CC0827D408670097811E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0727D408670097811E /* DataModel.swift */; };
+		04F5CC0827D408670097811E /* DataModel + DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0727D408670097811E /* DataModel + DataManager.swift */; };
 		04F5CC0A27D4CCE80097811E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC0927D4CCE80097811E /* NetworkManager.swift */; };
 		04F5CC1F27DA5ADB0097811E /* RootPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC1B27DA5ADB0097811E /* RootPresenter.swift */; };
 		04F5CC2027DA5ADB0097811E /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5CC1C27DA5ADB0097811E /* RootRouter.swift */; };
@@ -36,7 +36,7 @@
 		04F5CBF927D400B90097811E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04F5CBFC27D400B90097811E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04F5CBFE27D400B90097811E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04F5CC0727D408670097811E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		04F5CC0727D408670097811E /* DataModel + DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataModel + DataManager.swift"; sourceTree = "<group>"; };
 		04F5CC0927D4CCE80097811E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		04F5CC1B27DA5ADB0097811E /* RootPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPresenter.swift; sourceTree = "<group>"; };
 		04F5CC1C27DA5ADB0097811E /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		04F5CC0C27D4FE7F0097811E /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				04F5CC0727D408670097811E /* DataModel.swift */,
+				04F5CC0727D408670097811E /* DataModel + DataManager.swift */,
 				04F5CC2827DA5D740097811E /* KeyChainManager.swift */,
 			);
 			path = Domain;
@@ -306,7 +306,7 @@
 				04F5CBF527D400B70097811E /* ViewController.swift in Sources */,
 				04F5CC2227DA5ADB0097811E /* RootConfigurator.swift in Sources */,
 				04F5CC2927DA5D740097811E /* KeyChainManager.swift in Sources */,
-				04F5CC0827D408670097811E /* DataModel.swift in Sources */,
+				04F5CC0827D408670097811E /* DataModel + DataManager.swift in Sources */,
 				04F5CBF127D400B70097811E /* AppDelegate.swift in Sources */,
 				04F5CC2027DA5ADB0097811E /* RootRouter.swift in Sources */,
 				04F5CC3327DBB0900097811E /* PhotoViewController.swift in Sources */,

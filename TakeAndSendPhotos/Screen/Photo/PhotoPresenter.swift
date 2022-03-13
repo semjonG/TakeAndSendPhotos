@@ -47,7 +47,7 @@ extension PhotoPresenter: PhotoPresenterInput {
         
         dispatchGroup.notify(queue: .main) {
             print("all tasks upload")
-//            DataManager.chosenPhotos
+//            DataManager.chosenPhotos 
         }
     }
     

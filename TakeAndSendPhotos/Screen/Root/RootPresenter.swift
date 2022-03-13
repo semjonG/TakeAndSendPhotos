@@ -47,7 +47,6 @@ extension RootPresenter: RootPresenterInput {
                 self.router.routeToPhoto()
             }
         }
-        // Netwok
     }
 }
 
