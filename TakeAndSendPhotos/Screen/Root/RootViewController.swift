@@ -16,6 +16,7 @@ class RootViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
+        textField.placeholder = "login"
         
         return textField
     }()
@@ -24,6 +25,7 @@ class RootViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.borderWidth = 1
+        textField.placeholder = "password"
         
         return textField
     }()
@@ -40,6 +42,7 @@ class RootViewController: UIViewController {
     
     var label = UILabel()
     
+    
     // MARK: Injections
     var presenter: RootPresenterInput!
     var configurator: RootConfigurable!
@@ -49,6 +52,8 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .green
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Please, enter your login and password"
+        
         
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)

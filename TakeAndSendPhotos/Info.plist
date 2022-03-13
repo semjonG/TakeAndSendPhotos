@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>Privacy - Camera Usage Description</key>
+    <string>APPNAME requires access to your phone’s camera.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) uses Cameras</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Photo Library Access Warning</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -18,6 +24,11 @@
 				</dict>
 			</array>
 		</dict>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Your location is required for xyz benefits for you</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Your location is required for xyz benefits for you</string>
+		
 	</dict>
 </dict>
 </plist>
