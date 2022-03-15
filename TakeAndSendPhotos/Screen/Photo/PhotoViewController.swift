@@ -15,6 +15,20 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         presenter.set(chosenPhoto: images)
+//        imagePicker.
+//        let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as! NSURL
+//       let imageName = imageURL.path!.lastPathComponent
+//       let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first as String
+//       let localPath = documentDirectory.stringByAppendingPathComponent(imageName)
+
+//       let image = info[UIImagePickerControllerOriginalImage] as UIImage
+//       let data = UIImagePNGRepresentation(image)
+//       data.writeToFile(localPath, atomically: true)
+
+//       let imageData = NSData(contentsOfFile: localPath)!
+//       let photoURL = NSURL(fileURLWithPath: localPath)
+//       let imageWithData = UIImage(data: imageData)!
+//        dismiss(animated: true)
     }
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
@@ -80,7 +94,6 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
         let imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
-        present(imagePicker, animated: true, completion: nil)
     }
 
 }
@@ -92,9 +105,9 @@ extension PhotoViewController: PhotoPresenterOutput {
 
 extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
-        }
+       
+
+       
         dismiss(animated: true, completion: nil)
     }
 }

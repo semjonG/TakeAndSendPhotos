@@ -58,6 +58,12 @@ class NetworkManager: NetworkProtocol {
                         
                         onCompletion(string as! String)
                     }
+                    if httpResponse.statusCode == 401
+                    {
+                        // Refresh bearerToken get here
+                        let bearerToken = self.getBearerTokenDevice() //fetch api to get new bearer token
+                        return
+                    }
                 }
             }
             task.resume()
