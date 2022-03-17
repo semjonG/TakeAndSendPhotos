@@ -10,9 +10,9 @@ import RealmSwift
 class ImageFileModel: Object {
     @Persisted var id: String = ""
     @Persisted var name: String = ""
-    @Persisted var created: Date
+    @Persisted var created: Date // time create
     @Persisted var data: Data
-    @Persisted var send: Date?
+    @Persisted var send: Date? // time to send
     
     init(id: String, name: String, created: Date, data: Data, send: Date?) {
         self.id = id
@@ -22,7 +22,6 @@ class ImageFileModel: Object {
         self.send = send
     }
 }
-
 
 protocol DataManagerProtocol {
     func saveToRealm(photo: ImageFileModel)
@@ -39,12 +38,24 @@ class DataManager: DataManagerProtocol {
         }
     }
     
-    func updateToRealm(send: Date) {
+    func updateToRealm(photoID: String) {
+        let persons = realm.object(ofType: ImageFileModel.self, forPrimaryKey: photoID)
+        try! realm.write {
+//            persons.
+            // set each person's planet property to "Earth"
+            persons?.setValue(Date(), forKey: "send")
+        }
+//        photosData.data.removeAll()
+//        photosData.id = id
+//        photosData.name = name
+//        photosData.created = created
+//        photosData.send = Date()
+//        photosData.data.append(data)
         
     }
     
     func getAllImages() -> [ImageFileModel] {
-//        try! realm. взять все данные из базы данных
+        try! realm.objects(ImageFileModel.self)
     }
     
 

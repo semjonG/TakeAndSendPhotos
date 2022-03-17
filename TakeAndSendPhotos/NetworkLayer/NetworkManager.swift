@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NetworkProtocol {
-    func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void)
+    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void)
 }
 
 struct Login: Encodable {
@@ -25,15 +25,15 @@ class NetworkManager: NetworkProtocol {
         static let baseUrl = "https://test.dewival.com/api/"
     }
     
-    func logIn(email: String, password: String, onCompletion: @escaping (String) -> Void) {
+    func logIn(email: String, password: String, onCompletion: @escaping (Bool) -> Void) {
         
         guard let endpointUrl = URL(string: Static.baseUrl + "login/") else { return }
         
         //Make JSON to send request to server
         var json = [String:Any]()
         
-        json["login"] = "test"
-        json["password"] = "123456".toBase64()
+        json["login"] = email
+        json["password"] = password.toBase64()
         
         do {
             let data = try JSONSerialization.data(withJSONObject: json, options: [])
@@ -51,18 +51,13 @@ class NetworkManager: NetworkProtocol {
                     if httpResponse.statusCode == 200 {
                
                         // save login and password
-                        self.keychain.saveToKeychain(login: email, password: password)
+                        self.keychain.save(key: "login", value: email)
+                        self.keychain.save(key: "password", value: password)
                         // save token
                         let string = try! JSONSerialization.jsonObject(with: data2!, options: [.allowFragments])
                         self.keychain.save(key: "token", value: string)
                         
-                        onCompletion(string as! String)
-                    }
-                    if httpResponse.statusCode == 401
-                    {
-                        // Refresh bearerToken get here
-                        let bearerToken = self.getBearerTokenDevice() //fetch api to get new bearer token
-                        return
+                        onCompletion(true)
                     }
                 }
             }
@@ -100,11 +95,26 @@ class NetworkManager: NetworkProtocol {
         
         // Send a POST request to the URL, with the data we created earlier
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            guard let httpResponse = response as? HTTPURLResponse else {
+                onCompletion(false)
+                return
+            }
+            
+            if httpResponse.statusCode == 401 || httpResponse.statusCode == 403 {
+                guard let login = self.keychain.get(key: "login") as? String,
+                      let pass = self.keychain.get(key: "password") as? String else {
+                    onCompletion(false)
+                    return
+                }
+                self.logIn(email: login, password: pass) { res in
+                    onCompletion(res)
+                }
+            }
+            
             if error == nil {
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        onCompletion(true)
-                    }
+                
+                if httpResponse.statusCode == 200 {
+                    onCompletion(true)
                 }
                 
                 let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)

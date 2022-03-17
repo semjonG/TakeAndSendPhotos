@@ -57,6 +57,9 @@ class RootViewController: UIViewController {
     // MARK: View lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboardWhenTappedAround()
+        
         view.backgroundColor = .green
         
         view.addSubview(emailTextField)
@@ -103,5 +106,17 @@ class RootViewController: UIViewController {
 extension RootViewController: RootPresenterOutput {
     func showInfoLabel(text: String) {
         textLabel.text = text
+    }
+}
+
+extension RootViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RootViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
