@@ -25,7 +25,7 @@ class ImageFileModel: Object {
 
 protocol DataManagerProtocol {
     func saveToRealm(photo: ImageFileModel)
-    func getAllImages() -> [ImageFileModel]
+//    func getAllImages() -> [ImageFileModel]
 }
 
 class DataManager: DataManagerProtocol {
@@ -41,22 +41,13 @@ class DataManager: DataManagerProtocol {
     func updateToRealm(photoID: String) {
         let persons = realm.object(ofType: ImageFileModel.self, forPrimaryKey: photoID)
         try! realm.write {
-//            persons.
-            // set each person's planet property to "Earth"
             persons?.setValue(Date(), forKey: "send")
         }
-//        photosData.data.removeAll()
-//        photosData.id = id
-//        photosData.name = name
-//        photosData.created = created
-//        photosData.send = Date()
-//        photosData.data.append(data)
-        
     }
     
-    func getAllImages() -> [ImageFileModel] {
-        try! realm.objects(ImageFileModel.self)
-    }
+//    func getAllImages() -> [ImageFileModel] {
+//        try! realm.objects(ImageFileModel.self)
+//    }
     
 
 }

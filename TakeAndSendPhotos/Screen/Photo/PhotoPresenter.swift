@@ -40,11 +40,9 @@ extension PhotoPresenter: PhotoPresenterInput {
         let dataArray = chosenPhoto.map { NSData(data: $0.jpegData(compressionQuality: 0.9)!) }
         dataArray.forEach { data in
             
-//            фиксируем информацию о создании "посылки", дописать аргументы
-            self.dataManager.saveToRealm(photo: ImageFileModel(id: UUID().uuidString, send: nil))
+//            фиксируем информацию о создании "посылки"
+//            self.dataManager.saveToRealm(photo: ImageFileModel(id: UUID().uuidString, name: String, created: Date, data: Data, send: nil))
         }
-        
-        
         
         let dispatchGroup = DispatchGroup()
         for item in chosenPhoto {
@@ -53,15 +51,13 @@ extension PhotoPresenter: PhotoPresenterInput {
             networkManager.uploadImage(image: item) { res in
                 
                 // фиксируем дату и время "получения посылки"
-                self.dataManager.updateToRealm(send: Date())
+//                self.dataManager.updateToRealm(photoID: Date())
                 dispatchGroup.leave()
             }
         }
         
-//        let data = NSData(data: UIImageJPEGRepresentation(chosenPhoto: [UIImage],0.9))
         dispatchGroup.notify(queue: .main) {
             print("all tasks upload")
-//            dataManager.saveToRealm(chosenPhotos: List<DataModel>)
         }
     }
     
