@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PhotoRoutable: ViewRoutable {
-    
+    func showSuccessAlert()
 }
 
 class PhotoRouter {
@@ -25,5 +25,7 @@ class PhotoRouter {
 
 // MARK: - PhotoRoutable
 extension PhotoRouter: PhotoRoutable {
-    
+    func showSuccessAlert() {
+        // mark
+    }
 }

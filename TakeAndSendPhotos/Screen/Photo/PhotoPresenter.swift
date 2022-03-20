@@ -14,7 +14,7 @@ protocol PhotoPresenterInput: BasePresenterInput {
 }
 
 protocol PhotoPresenterOutput: BasePresenterOutput {
-    
+
 }
 
 class PhotoPresenter {
@@ -39,31 +39,83 @@ extension PhotoPresenter: PhotoPresenterInput {
     func set(chosenPhoto: [UIImage]) {
         let dataArray = chosenPhoto.map { NSData(data: $0.jpegData(compressionQuality: 0.9)!) }
         dataArray.forEach { data in
-            
-//            фиксируем информацию о создании "посылки"
-//            self.dataManager.saveToRealm(photo: ImageFileModel(id: UUID().uuidString, name: String, created: Date, data: Data, send: nil))
+        
+            // saving and creating information about data
+            self.dataManager.saveToRealm(
+                photo: ImageFileModel(id: UUID().uuidString,
+                                      name: String.random(), 
+                                      created: Date(),
+                                      data: data as Data,
+                                      send: nil)
+            )
         }
         
         let dispatchGroup = DispatchGroup()
-        for item in chosenPhoto {
+        for item in self.dataManager.getAllImages() {
             dispatchGroup.enter()
-//            отправка "посылки"
-            networkManager.uploadImage(image: item) { res in
+            
+            // sending data
+            networkManager.uploadImage(image: item.data!) { res in
                 
-                // фиксируем дату и время "получения посылки"
-//                self.dataManager.updateToRealm(photoID: Date())
-                dispatchGroup.leave()
+                // updating data
+                DispatchQueue.main.async {
+                    self.dataManager.updateToRealm(photoID: item.id)
+                    dispatchGroup.leave()
+                }
             }
         }
-        
+      
         dispatchGroup.notify(queue: .main) {
             print("all tasks upload")
+            self.router.showSuccessAlert()
+            let data = self.dataManager.getAllImages()
+            for item in data {
+                print(item.send)
+            }
         }
     }
     
     func viewDidLoad() {
         
-    }
+        let data = dataManager.getAllImages()
+        let items = data.filter { $0.send == nil}
+        if !items.isEmpty {
+            let dispatchGroup = DispatchGroup()
+            for item in self.dataManager.getAllImages() {
+                dispatchGroup.enter()
+                
+                // sending data
+                networkManager.uploadImage(image: item.data!) { res in
+                    
+                    // updating data
+                    DispatchQueue.main.async {
+                        self.dataManager.updateToRealm(photoID: item.id)
+                        dispatchGroup.leave()
+                    }
+                }
+            }
     
+            dispatchGroup.notify(queue: .main) {
+                print("all tasks upload")
+                let data = self.dataManager.getAllImages()
+                for item in data {
+                    print(item.send)
+                }
+            }
+        }
+    }
 }
 
+extension String {
+
+    static func random(length: Int = 20) -> String {
+        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString: String = ""
+
+        for _ in 0..<length {
+            let randomValue = arc4random_uniform(UInt32(base.count))
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
+        }
+        return randomString
+    }
+}

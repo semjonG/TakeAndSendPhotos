@@ -45,7 +45,7 @@ class RootViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .blue
         button.addTarget(self, action: #selector(onLogin), for: .touchUpInside)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 20
         
         return button
     }()
@@ -60,7 +60,7 @@ class RootViewController: UIViewController {
         
         self.hideKeyboardWhenTappedAround()
         
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
@@ -84,7 +84,7 @@ class RootViewController: UIViewController {
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
             passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            loginButton.widthAnchor.constraint(equalToConstant: 100),
+            loginButton.widthAnchor.constraint(equalToConstant: 120),
             loginButton.heightAnchor.constraint(equalToConstant: 40),
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10),
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

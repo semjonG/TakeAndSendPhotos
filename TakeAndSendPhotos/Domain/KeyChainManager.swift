@@ -9,14 +9,6 @@ import Locksmith
 
 class KeychainManager {
 
-    func saveToKeychain(login:String, password: String) {
-        do {
-            try Locksmith.saveData(data: ["login" : login, "password" : password], forUserAccount: "MyAccount")
-        } catch {
-            print("Unable to save data")
-        }
-    }
-    
     func save(key: String, value: Any) {
         do {
             try Locksmith.deleteDataForUserAccount(userAccount: "MyAccount")

@@ -68,7 +68,7 @@ class NetworkManager: NetworkProtocol {
         }
     }
     
-    func uploadImage(image: UIImage, onCompletion: @escaping (Bool) -> ()) {
+    func uploadImage(image: Data, onCompletion: @escaping (Bool) -> ()) {
         let url = URL(string: Static.baseUrl + "sendfile/")
         
         // generate boundary string using a unique per-app string
@@ -90,7 +90,7 @@ class NetworkManager: NetworkProtocol {
         // Add the image data to the raw http request data
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-        data.append(image.pngData()!)
+        data.append(image)
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
         
         // Send a POST request to the URL, with the data we created earlier

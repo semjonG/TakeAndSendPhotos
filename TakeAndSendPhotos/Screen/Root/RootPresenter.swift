@@ -31,14 +31,17 @@ class RootPresenter {
         self.output = output
         self.router = router
     }
-    
 }
 
 // MARK: - RootPresenterInput
 extension RootPresenter: RootPresenterInput {
     
     func viewDidLoad() {
-        
+        // you don't need to enter login and password again because:
+        let keychain = KeychainManager()
+        if let _ = keychain.get(key: "token") {
+            self.router.routeToPhoto()
+        }
     }
     
     func onLogin(email: String, password: String) {

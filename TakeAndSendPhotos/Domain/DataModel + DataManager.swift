@@ -8,24 +8,28 @@
 import RealmSwift
 
 class ImageFileModel: Object {
-    @Persisted var id: String = ""
-    @Persisted var name: String = ""
-    @Persisted var created: Date // time create
-    @Persisted var data: Data
-    @Persisted var send: Date? // time to send
+    @objc  dynamic var id: String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var created: Date = Date()  // time create
+    @objc dynamic var data: Data? = nil
+    @objc dynamic var send: Date? = nil // time to send
     
-    init(id: String, name: String, created: Date, data: Data, send: Date?) {
+    convenience init(id: String, name: String, created: Date, data: Data, send: Date?) {
+        self.init()
         self.id = id
         self.name = name
         self.created = created
         self.data = data
         self.send = send
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 protocol DataManagerProtocol {
     func saveToRealm(photo: ImageFileModel)
-//    func getAllImages() -> [ImageFileModel]
 }
 
 class DataManager: DataManagerProtocol {
@@ -45,9 +49,8 @@ class DataManager: DataManagerProtocol {
         }
     }
     
-//    func getAllImages() -> [ImageFileModel] {
-//        try! realm.objects(ImageFileModel.self)
-//    }
-    
-
+    func getAllImages() -> [ImageFileModel] {
+        let result = try? realm.objects(ImageFileModel.self)
+        return result == nil ? [] : Array(result!)
+    }
 }
