@@ -43,7 +43,7 @@ extension PhotoPresenter: PhotoPresenterInput {
             // saving and creating information about data
             self.dataManager.saveToRealm(
                 photo: ImageFileModel(id: UUID().uuidString,
-                                      name: String.random(), 
+                                      name: "Random id: \(String.random())", 
                                       created: Date(),
                                       data: data as Data,
                                       send: nil)
@@ -66,7 +66,6 @@ extension PhotoPresenter: PhotoPresenterInput {
         }
       
         dispatchGroup.notify(queue: .main) {
-            print("all tasks upload")
             self.router.showSuccessAlert()
             let data = self.dataManager.getAllImages()
             for item in data {
@@ -96,7 +95,7 @@ extension PhotoPresenter: PhotoPresenterInput {
             }
     
             dispatchGroup.notify(queue: .main) {
-                print("all tasks upload")
+                self.router.showSuccessAlert()
                 let data = self.dataManager.getAllImages()
                 for item in data {
                     print(item.send)

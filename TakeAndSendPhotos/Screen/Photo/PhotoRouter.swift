@@ -20,12 +20,22 @@ class PhotoRouter {
     required init(viewController: UIViewController) {
         self.viewController = viewController
     }
-    
 }
 
 // MARK: - PhotoRoutable
 extension PhotoRouter: PhotoRoutable {
     func showSuccessAlert() {
-        // mark
+        
+        let uiVC = PhotoViewController()
+
+        let dialogMessage = UIAlertController(title: "Success!", message: "Data has been sent to the server", preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            print("Ok button tapped")
+         })
+
+        dialogMessage.addAction(ok)
+        
+        uiVC.present(dialogMessage, animated: true, completion: nil)
     }
 }

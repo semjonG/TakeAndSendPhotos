@@ -9,9 +9,8 @@ import UIKit
 import ImagePicker
 
 class PhotoViewController: UIViewController, ImagePickerDelegate {
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        
-    }
+
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {}
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         presenter.set(chosenPhoto: images)
@@ -19,9 +18,7 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-        
-    }
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {}
     
     private var imagePicker = UIImagePickerController()
     
@@ -75,7 +72,6 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
         configurator = PhotoConfigurator()
         configurator.configure(viewController: self)
         presenter.viewDidLoad()
-        
     }
     
     @objc func pickImageButtonPressed() {
@@ -83,7 +79,6 @@ class PhotoViewController: UIViewController, ImagePickerDelegate {
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
-
 }
 
 // MARK: - PhotoPresenterOutput
@@ -93,9 +88,7 @@ extension PhotoViewController: PhotoPresenterOutput {
 
 extension PhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-       
 
-       
         dismiss(animated: true, completion: nil)
     }
 }

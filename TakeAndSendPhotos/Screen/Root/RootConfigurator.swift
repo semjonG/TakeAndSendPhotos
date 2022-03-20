@@ -24,6 +24,5 @@ class RootConfigurator: RootConfigurable {
         )
         
         viewController.presenter = presenter
-
     }
 }

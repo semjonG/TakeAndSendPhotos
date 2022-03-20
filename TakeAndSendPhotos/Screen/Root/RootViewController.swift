@@ -67,7 +67,6 @@ class RootViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(textLabel)
         
-        
         NSLayoutConstraint.activate([
             textLabel.widthAnchor.constraint(equalToConstant: 300),
             textLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -93,7 +92,6 @@ class RootViewController: UIViewController {
         configurator = RootConfigurator()
         configurator.configure(viewController: self)
         presenter.viewDidLoad()
-        
     }
 
     @objc
