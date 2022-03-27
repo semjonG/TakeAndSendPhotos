@@ -9,13 +9,9 @@ You can log in through the server, take several photos (information about them i
 ### Авторизация
 
 https://test.dewival.com/api/login/
-
 логин - пароль: test - 123456
-
 Метод POST, Content-type - application/json
-
 При отправке пароль должен быть закодирован в base64
-
 В ответ придет токен (JWT) (строка)
 
 ### Отправка файла
